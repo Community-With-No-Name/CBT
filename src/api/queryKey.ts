@@ -1,4 +1,4 @@
 export const queryKeys = {
-  getAppointments: "getAppointments",
-  getAppointment: "getAppointment"
+  getFacultyCourses: "getFacultyCourses",
+  getUserCourses: "getUserCourses",
 }

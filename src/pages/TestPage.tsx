@@ -25,12 +25,15 @@ export default function TestPage() {
         setQuestion(questions[qN])
         setQuestionNumber(qN)
     }
+    const time = new Date();
+  // time.setMinutes()
+  time.setMinutes(75)
   return (
     // <Layout page="Test Page">
         <>
       {/* <div className="py-8 border-8 border-gray-900 max-w-7xl"> */}
       <div className="mt-24 max-w-7xl">
-          <Header />
+          <Header timeExpires={time} />
           <Question question={question} page={questionNumber} />
           <NavButtons handlePrev={handlePrev} handleNext={handleNext} />
           <PageButtons questions={questions} moveToQuestion={moveToQuestion} qN={questionNumber} />

@@ -1,13 +1,35 @@
+import { getRequest } from 'api/apiCall'
+import { GETUSERCOURSE } from 'api/apiUrl'
+import { queryKeys } from 'api/queryKey'
 import Layout from 'components/Layout'
+import jwtDecode from 'jwt-decode'
 import React from 'react'
+import { useQuery } from 'react-query'
+import { SingleAutoComplete } from 'utils/AutoComplete'
 import image from "../images/login.svg"
 export default function Test() {
     const handleSubmit = (e: any) => {
         e.preventDefault()
     }
-    const handleChange = () => {
-        
-    }
+    const { data: userCourseList } = useQuery(
+      queryKeys.getUserCourses,
+      async () => await getRequest({ url: GETUSERCOURSE }),
+      {
+        retry: 2,
+      }
+    );
+    const [userCourses, setUserCourses] = React.useState(userCourseList?.data);
+    React.useEffect(() => {
+      setUserCourses(userCourseList?.data);
+    }, [userCourseList?.data]);
+    const data = userCourses?.courses?.map(course=>{
+      return {
+        label: course?.courseName,
+        value: course?.courseName
+      }
+    })
+    const [value, setValue] = React.useState()
+    const user: {fullName: string, department: string, email: String, faculty: String} = jwtDecode(localStorage.getItem("cbt_token"))
     return (
         <Layout page="Take Test">
             <div className="flex flex-col items-center justify-center h-screen max-w-4xl">
@@ -23,9 +45,9 @@ export default function Test() {
               <img className="object-cover object-center w-40 h-40 mx-auto transition-all transform rounded-full hover:scale-110 hover:-translate-y-3" src={image} alt="" />
             </div>
             <div className="mt-4 text-center sm:mt-0 sm:pt-1 sm:text-left">
-              <p className="text-xl font-bold text-gray-900 sm:text-2xl">Jubril Musa</p>
-              <p className="text-sm font-medium text-gray-600">Jewbreel1@gmail.com</p>
-              <p className="text-sm font-medium text-gray-600 capitalize">Department: Computer Science</p>
+              <p className="text-xl font-bold text-gray-900 sm:text-2xl">{user?.fullName}</p>
+              <p className="text-sm font-medium text-gray-600">{user.email}</p>
+              <p className="text-sm font-medium text-gray-600 capitalize">Department: {user.department}</p>
             </div>
           </div>
         </div>
@@ -37,7 +59,8 @@ export default function Test() {
               <label htmlFor="name">
                 Course Name
               </label>
-              <input onChange={handleChange}
+              <SingleAutoComplete data={data} classStyles="relative block w-full px-3 py-2 mb-1 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-gray-500 focus:border-gray-500 focus:z-10 sm:text-sm" value={value} setValue={setValue} />
+              {/* <input onChange={handleChange}
                 id="name"
                 name="name"
                 type="text"
@@ -45,7 +68,7 @@ export default function Test() {
                 required
                 className="relative block w-full px-3 py-2 mb-1 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-gray-500 focus:border-gray-500 focus:z-10 sm:text-sm"
                 placeholder="Enter Course Name"
-                />
+                /> */}
             </div>
             <div>
     </div>

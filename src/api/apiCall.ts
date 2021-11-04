@@ -17,6 +17,6 @@ export const deleteRequest = async ({ url } : {url: string}) => {
 
 export const login = async ({ url, data }: { url: string, data: {} | string }) => {
   const response = await axios.post(url, data)
-  localStorage.setItem('token', response.data)
+  localStorage.setItem('cbt_token', response.data)
   return response.data
 }

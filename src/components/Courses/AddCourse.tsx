@@ -1,7 +1,8 @@
 import { Dialog, DialogTitle, DialogContent, TextareaAutosize } from '@material-ui/core'
 import React from 'react'
+import { SingleAutoComplete } from 'utils/AutoComplete'
 
-export default function FormDialog({handleSubmit, handleChange, open, setOpen}) {
+export default function FormDialog({handleSubmit, handleChange, open, setOpen, courses, value, setValue}) {
   // const [open, setOpen] = React.useState<boolean>(false)
 
   const handleClickOpen = () => {
@@ -10,6 +11,12 @@ export default function FormDialog({handleSubmit, handleChange, open, setOpen}) 
   const handleClickClose = () => {
     setOpen(false)
   }
+  const data = courses?.map(course=>{
+    return {
+      label: course?.courseName,
+      value: course?.courseName
+    }
+  })
   return (
     <>
       <button
@@ -35,10 +42,11 @@ export default function FormDialog({handleSubmit, handleChange, open, setOpen}) 
         <DialogContent className='h-auto my-auto'>
           <form onSubmit={handleSubmit} className='mx-3 mb-3'>
           <div className='my-2'>
-              <label htmlFor="name">
+              <label htmlFor="name" className="pb-3">
                 Course Name
               </label>
-              <input onChange={handleChange}
+              <SingleAutoComplete data={data} classStyles="relative block w-full px-3 py-2 mb-1 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-gray-500 focus:border-gray-500 focus:z-10 sm:text-sm" value={value} setValue={setValue} />
+              {/* <input onChange={handleChange}
                 id="name"
                 name="name"
                 type="text"
@@ -46,7 +54,7 @@ export default function FormDialog({handleSubmit, handleChange, open, setOpen}) 
                 required
                 className="relative block w-full px-3 py-2 mb-1 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-gray-500 focus:border-gray-500 focus:z-10 sm:text-sm"
                 placeholder="Enter Course Name"
-              />
+              /> */}
             </div>
             <div>
     </div>

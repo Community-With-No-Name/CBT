@@ -1,7 +1,12 @@
-const API_URL = process.env.NODE_ENV==="production" ? "https://bft-interview-api.herokuapp.com/api" : "http://localhost:8000/api"
+const API = process.env.NODE_ENV==="production" ? "https://bft-interview-api.herokuapp.com/api" : "http://localhost:8000/api"
 
-export const LOGIN_URL = `${API_URL}/auth/`
-export const GET_APPOINTMENTS = (page: any) => `${API_URL}/appointment/page/${page}`
-export const DELETE_APPOINTMENT =(id: string)=> `${API_URL}/appointment/${id}`
-export const GET_APPOINTMENT =(id: string)=> `${API_URL}/appointment/${id}`
-export const MAKE_APPOINTMENTS = `${API_URL}/appointment`
+const AUTH = `${API}/auth/`
+const COURSES = `${API}/courses/`
+const QUESTIONS = `${API}/questions/`
+const RESULTS = `${API}/results/`
+const USERCOURSES = `${API}/userCourses/`
+export const LOGIN = `${AUTH}/login`
+export const REGISTER = `${AUTH}/register`
+export const GETCOURSES = `${COURSES}/`
+export const ADDUSERCOURSE = `${USERCOURSES}/`
+export const GETUSERCOURSE = `${USERCOURSES}/`

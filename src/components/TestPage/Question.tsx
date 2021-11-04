@@ -1,6 +1,9 @@
 import React from 'react'
 
 export default function Question({question, page}) {
+  const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+    alert(e.target.value)
+  }
     return (
         <>
          <div className="flex justify-start px-6 pb-1">
@@ -13,26 +16,16 @@ export default function Question({question, page}) {
         </div>
         <div className="flex justify-start px-6">
           <div className="py-5 text-lg">
+            {
+              question?.options.map(option=>(
             <div className="py-2">
                 <div className="text-xl font-extrabold">Option A</div>
-              <input type="radio" className="text-gray-700" name="answer" value={question.options[0].option} id={question?.question_id} />
-              <label htmlFor="" className="ml-4 font-lg">{question.options[0].option}</label>
+              <input type="radio" onChange={handleChange} className="text-gray-700" name={question.question} value={option} />
+              <label htmlFor="" className="ml-4 font-lg">{option}</label>
             </div>
-            <div className="py-2">
-                <div className="text-xl font-extrabold">Option B</div>
-              <input type="radio" className="text-gray-700" name="answer" value={question.options[1].option} id={question?.question_id} />
-              <label htmlFor="" className="ml-4 font-lg">{question.options[1].option}</label>
-            </div>
-            <div className="py-2">
-                <div className="text-xl font-extrabold">Option C</div>
-              <input type="radio" className="text-gray-700" name="answer" value={question.options[2].option} id={question?.question_id} />
-              <label htmlFor="" className="ml-4 font-lg">{question.options[2].option}</label>
-            </div>
-            <div className="py-2">
-                <div className="text-xl font-extrabold">Option D</div>
-              <input type="radio" className="text-gray-700" name="answer" value={question.options[3].option} id={question?.question_id} />
-              <label htmlFor="" className="ml-4 font-lg">{question.options[3].option}</label>
-            </div>
+              ))
+            }
+            
           </div>
         </div>   
         </>

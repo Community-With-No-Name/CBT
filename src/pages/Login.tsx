@@ -3,7 +3,7 @@ import { useMutation } from "react-query";
 import { login } from 'api/apiCall';
 import { ToastContext } from "../App"
 import { queryKeys } from "api/queryKey";
-import { LOGIN_URL } from '../api/apiUrl';
+import { LOGIN } from '../api/apiUrl';
 import img from "../images/login.svg"
 export default function Login(props) {
   const [state, setState] = React.useState({
@@ -18,16 +18,16 @@ export default function Login(props) {
   const { mutate } = useMutation(login, {
     onSuccess(data) {
       setDisabled(false);
-      setTimeout(() => {
-        window.location.href="/admin"
-      }, 3000)
+      if(data) {
+        window.location.href="/user"
+      }
+      else {
+        alert(`Login Failed`)
+      }
     },
-    onError() {
+    onError(data) {
       setDisabled(false);
-      showAlert({
-        message: "Login Failed",
-        severity: "error",
-      });
+      alert("Login Failed")
     }
     
   });
@@ -35,7 +35,7 @@ export default function Login(props) {
     e.preventDefault();
     setDisabled(true)
     mutate({
-      url: LOGIN_URL,
+      url: LOGIN,
       data: {
         email: state.email,
         password: state.password,

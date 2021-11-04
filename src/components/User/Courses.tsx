@@ -1,68 +1,12 @@
 import React from 'react'
 
-export default function Courses() {
-    const courseList = [
-        {
-            name: "MAT 101",
-            total_question_answered: 50,
-            total_right_answer: 50,
-            speed_and_accuracy: 50,
-        },
-        {
-            name: "BIO 101",
-            total_question_answered: 50,
-            total_right_answer: 50,
-            speed_and_accuracy: 50,
-        },
-        {
-            name: "PHY 101",
-            total_question_answered: 50,
-            total_right_answer: 50,
-            speed_and_accuracy: 50,
-        },
-        {
-            name: "CSC 111",
-            total_question_answered: 50,
-            total_right_answer: 50,
-            speed_and_accuracy: 50,
-        },
-        {
-            name: "CHEM 101",
-            total_question_answered: 50,
-            total_right_answer: 50,
-            speed_and_accuracy: 50,
-        },
-        {
-            name: "MAT 141",
-            total_question_answered: 50,
-            total_right_answer: 50,
-            speed_and_accuracy: 50,
-        },
-        {
-            name: "MAT 111",
-            total_question_answered: 50,
-            total_right_answer: 50,
-            speed_and_accuracy: 50,
-        },
-        {
-            name: "PHY 105",
-            total_question_answered: 50,
-            total_right_answer: 50,
-            speed_and_accuracy: 50,
-        },
-        {
-            name: "GNS 101",
-            total_question_answered: 50,
-            total_right_answer: 50,
-            speed_and_accuracy: 50,
-        },
-    ]
+export default function Courses({course}) {
     return (
         <>
            <div className="pt-5" />
     <h1 className="text-2xl font-semibold text-gray-900">Registered Courses</h1>
     <div className="flex flex-wrap pt-5 -m-2" id="Guests">
-      {courseList?.map((course: any) => (
+      {course?.courses?.map((course: any) => (
         <div
           className="w-full p-2 lg:w-1/3 md:w-1/2 sm:w-full searchBody"
           key={course.id}
@@ -76,20 +20,20 @@ export default function Courses() {
             >
             </div>
             <div className="flex-grow">
-              <h2 className="font-medium text-gray-900 title-font">{course?.name}</h2>
+              <h2 className="font-medium text-gray-900 title-font">{course?.courseName}</h2>
               {
                   [
                       {
                           title: "Total Question Answered",
-                          value: course.total_question_answered
+                          value: 50
                       },
                       {
                           title: "Total Right Answer",
-                          value: course.total_right_answer
+                          value: 50
                       },
                       {
                           title: "Speed And Accuracy",
-                          value: course.speed_and_accuracy
+                          value: 50
                       },
                   ].map((detail, i)=>(
               <div className="flex justify-between w-3/4" key={i}>

@@ -2,7 +2,7 @@ import React from 'react'
 import image from "../../images/login.svg"
 
 
-export default function Header() {
+export default function Header({user}) {
   return (
     <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
       <div className="overflow-hidden bg-white rounded-lg shadow">
@@ -17,8 +17,10 @@ export default function Header() {
             </div>
             <div className="mt-4 text-center sm:mt-0 sm:pt-1 sm:text-left">
               <p className="text-sm font-medium text-gray-600">Welcome back,</p>
-              <p className="text-xl font-bold text-gray-900 sm:text-2xl">Jubril Musa</p>
-              <p className="text-sm font-medium text-gray-600">Jewbreel1@gmail.com</p>
+              <p className="text-xl font-bold text-gray-900 sm:text-2xl">{user.fullName}</p>
+              <p className="text-sm font-medium text-gray-600">{user.email}</p>
+              <p className="text-sm font-medium text-gray-600">{user.faculty}</p>
+              <p className="text-sm font-medium text-gray-600">{user.department}</p>
             </div>
           </div>
         </div>

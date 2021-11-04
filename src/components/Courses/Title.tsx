@@ -4,7 +4,7 @@ import React from 'react'
 import FormDialog from './AddCourse'
 // import FormDialog from './AddCourse'
 
-export default function Title({handleSearch, handleSubmit, handleChange, open, setOpen}) {
+export default function Title({handleSearch, handleSubmit, handleChange, open, setOpen, courses, value, setValue}) {
   return (
     <div className="pb-5 border-b border-gray-200 sm:flex sm:items-center sm:justify-between">
       <h1 className="text-2xl font-semibold text-gray-900">
@@ -45,7 +45,7 @@ export default function Title({handleSearch, handleSubmit, handleChange, open, s
             <ChevronDownIcon className="ml-2.5 -mr-1.5 h-5 w-5 text-gray-400" aria-hidden="true" />
           </button> */}
           {/* <SlideOver title="Add Course" Component={Component} /> */}
-          <FormDialog handleSubmit={handleSubmit} handleChange={handleChange} open={open} setOpen={setOpen} />
+          <FormDialog handleSubmit={handleSubmit} handleChange={handleChange} open={open} setOpen={setOpen} courses={courses} value={value} setValue={setValue} />
         </div>
       </div>
     </div>
