@@ -11,6 +11,7 @@ import {
   UsersIcon,
   XIcon,
   BookmarkAltIcon,
+  LogoutIcon
 } from '@heroicons/react/outline'
 import { Link } from "react-router-dom"
 const navigation = [
@@ -25,7 +26,12 @@ function classNames(...classes) {
 
 export default function Layout({children, page}) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
-
+const logOut = (e: any) => {
+  e.preventDefault()
+  localStorage.removeItem("cbt_token")
+  alert("log out successful")
+  window.location.href = "/login"
+}
   return (
     <div className="flex h-screen overflow-hidden bg-gray-100">
       <Transition.Root show={sidebarOpen} as={Fragment}>
@@ -104,6 +110,23 @@ export default function Layout({children, page}) {
                       {item.name}
                     </Link>
                   ))}
+                  <a
+                    href=""
+                    onClick={logOut}
+                    className={classNames(
+                       'text-gray-300 hover:bg-gray-700 hover:text-white',
+                      'group flex items-center px-2 py-2 text-sm font-medium rounded-md'
+                    )}
+                  >
+                    <LogoutIcon
+                      className={classNames(
+                        'text-gray-400 group-hover:text-gray-300',
+                        'mr-3 h-6 w-6'
+                      )}
+                      aria-hidden="true"
+                    />
+                    Log Out
+                  </a>
                 </nav>
               </div>
               <div className="flex flex-shrink-0 p-4 bg-gray-700">
@@ -162,6 +185,23 @@ export default function Layout({children, page}) {
                     {item.name}
                   </Link>
                 ))}
+                  <a
+                    href=""
+                    onClick={logOut}
+                    className={classNames(
+                       'text-gray-300 hover:bg-gray-700 hover:text-white',
+                      'group flex items-center px-2 py-2 text-sm font-medium rounded-md'
+                    )}
+                  >
+                    <LogoutIcon
+                      className={classNames(
+                        'text-gray-400 group-hover:text-gray-300',
+                        'mr-3 h-6 w-6'
+                      )}
+                      aria-hidden="true"
+                    />
+                    Log Out
+                  </a>
               </nav>
             </div>
             <div className="flex flex-shrink-0 p-4 bg-gray-700">

@@ -18,7 +18,7 @@ export default function Login(props) {
   const { mutate } = useMutation(login, {
     onSuccess(data) {
       setDisabled(false);
-      if(data) {
+      if(!data?.error) {
         window.location.href="/user"
       }
       else {

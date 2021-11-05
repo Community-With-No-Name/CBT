@@ -5,12 +5,11 @@ import Layout from 'components/Layout'
 import jwtDecode from 'jwt-decode'
 import React from 'react'
 import { useQuery } from 'react-query'
+import AlertNotification from 'utils/Alerts'
 import { SingleAutoComplete } from 'utils/AutoComplete'
 import image from "../images/login.svg"
 export default function Test() {
-    const handleSubmit = (e: any) => {
-        e.preventDefault()
-    }
+  
     const { data: userCourseList } = useQuery(
       queryKeys.getUserCourses,
       async () => await getRequest({ url: GETUSERCOURSE }),
@@ -28,9 +27,25 @@ export default function Test() {
         value: course?.courseName
       }
     })
-    const [value, setValue] = React.useState()
     const user: {fullName: string, department: string, email: String, faculty: String} = jwtDecode(localStorage.getItem("cbt_token"))
+    const [open, setOpen] = React.useState(false)
+    const [severity, setSeverity] = React.useState("")
+    const [message, setMessage] = React.useState("")
+    const [value, setValue] = React.useState()
+      const handleTest = (e: any) => {
+          e.preventDefault()
+          setSeverity("success")
+          setMessage(`${value} Test`)
+          setOpen(true)
+          var filteredCourse = userCourses?.courses.filter(course=>course?.courseName===value)
+          setTimeout(()=> {
+            setOpen(false)
+            window.location.href=`/test/${filteredCourse[0]?._id}`
+          }, 4000 )
+      }
     return (
+      <>
+          <AlertNotification open={open} setOpen={setOpen} message={message} />
         <Layout page="Take Test">
             <div className="flex flex-col items-center justify-center h-screen max-w-4xl">
             <div className="grid w-full grid-cols-1 gap-4">
@@ -54,7 +69,7 @@ export default function Test() {
       </div>
     </div>
     </div>
-            <form onSubmit={handleSubmit} className='w-full px-6 mx-3 mb-3 mt-9'>
+            <form onSubmit={handleTest} className='w-full px-6 mx-3 mb-3 mt-9'>
           <div className='my-2'>
               <label htmlFor="name">
                 Course Name
@@ -84,5 +99,6 @@ export default function Test() {
         </form>
                 </div>
         </Layout>
+        </>
     )
 }
