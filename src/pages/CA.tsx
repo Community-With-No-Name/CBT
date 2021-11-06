@@ -45,7 +45,7 @@ export default function Test() {
       }
     return (
       <>
-          <AlertNotification open={open} setOpen={setOpen} message={message} />
+          <AlertNotification open={open} setOpen={setOpen} message={message} severity="success" />
         <Layout page="Take Test">
             <div className="flex flex-col items-center justify-center h-screen max-w-4xl">
             <div className="grid w-full grid-cols-1 gap-4">
